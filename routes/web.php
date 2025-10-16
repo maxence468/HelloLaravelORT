@@ -75,7 +75,7 @@ Route::patch('/articles/{id}', function($id){
     ]);
 
     //les données sont validés
-    $a = Article::find($id);
+    $a = Article::findOrFail($id);
     $a->title = request('title');
     $a->content = request('content');
     $a->picture = request('picture');
