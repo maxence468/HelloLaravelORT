@@ -13,6 +13,13 @@
 <p>Photo : {{$article->picture}}</p>
 <p>Date Création : {{$article->created_at}}</p>
 <p>Date modification : {{$article->updated_at}}</p>
+<p><a href="/articles/{{$article->id}}/edit">Modifier l'article</a></p>
+<p><a href="/articles">Afficher tous les articles</a></p>
+<form action="/articles/{{$article->id}}" method="post">
+    @csrf
+    @method('delete')
+    <button>Supprimer</button>
+</form>
 
 
 

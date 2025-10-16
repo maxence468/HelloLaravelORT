@@ -58,3 +58,35 @@ Route::post('/articles', function(){
     return redirect('/articles/'.$a->id);
 });
 
+Route::get('/articles/{id}/edit', function($id){
+    //recuperer 1 seul article
+    $article = Article::findOrFail($id);
+
+    //envoyer à une vue
+    return view('edit', compact('article'));
+});
+
+
+Route::patch('/articles/{id}', function($id){
+    //valider les données (verifier qu'elles sont bien remplies)
+    request()->validate([
+        'title'=>'required|min:5|max:50',
+        'content'=>'required'
+    ]);
+
+    //les données sont validés
+    $a = Article::find($id);
+    $a->title = request('title');
+    $a->content = request('content');
+    $a->picture = request('picture');
+
+    $a->save();
+
+    return redirect('/articles/'.$a->id);
+});
+
+Route::delete('/articles/{id}', function($id){
+   $a = Article::findOrFail($id);
+   $a->delete();
+   return redirect('/articles');
+});

@@ -13,6 +13,8 @@
                 <td>ID</td>
                 <td>Title</td>
                 <td>Publication date</td>
+                <td>Modifier l'article</td>
+                <td>Supprimer l'article</td>
             </tr>
 
         @foreach($articles as $article)
@@ -20,8 +22,15 @@
                 <td>{{$article->id}}</td>
                 <td><a href="/articles/{{$article->id}}">{{$article->title}}</a></td>
                 <td>{{$article->published_at}}</td>
+                <td><a href="/articles/{{$article->id}}/edit">Modifier</a></td>
+                <td> <form action="/articles/{{$article->id}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button>Supprimer</button>
+                    </form> </td>
             </tr>
         @endforeach
         </table>
+<a href="/articles/create">Créer un nouvel article</a>
 </body>
 </html>

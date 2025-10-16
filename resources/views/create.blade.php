@@ -24,5 +24,6 @@
         <input type="text" name="picture" placeholder="Photo" value="{{old('picture')}}">
         <button name="btnCreate">Créer</button>
     </form>
+<a href="/articles">Afficher tous les articles</a>
 </body>
 </html>
