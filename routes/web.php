@@ -39,6 +39,14 @@ Route::get('/articles/{id}', function($id){
 });
 
 Route::post('/articles', function(){
+    //valider les données (verifier qu'elles sont bien remplies)
+
+    request()->validate([
+       'title'=>'required|min:5|max:50',
+       'content'=>'required'
+    ]);
+
+    //les données sont validés
     $a = new Article;
     $a->title = request('title');
     $a->content = request('content');
