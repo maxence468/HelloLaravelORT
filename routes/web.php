@@ -19,3 +19,8 @@ Route::get('/home', function () {
 });
 
 Route::resource('articles',ArticleController::class);
+
+Route::get('/test',function(){
+    return view('neuralGlass');
+
+});
