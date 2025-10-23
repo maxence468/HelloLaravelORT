@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
@@ -17,76 +18,16 @@ Route::get('/home', function () {
     ]);
 });
 
-Route::get('/articles',function(){
-    //recupere tous les articles
-    $articles = Article::all();
+Route::get('/articles', [ArticleController::class, 'index']);
 
-    //envoie à une vue
-    return view('index', compact('articles'));
-});
+Route::get('/articles/create', [ArticleController::class, 'create']);
 
-Route::get('/articles/create', function(){
+Route::get('/articles/{article}', [ArticleController::class, 'show']);
 
-       return view('create');
-});
+Route::post('/articles', [ArticleController::class,'store']);
 
-Route::get('/articles/{id}', function($id){
-    //recuperer 1 seul article
-    $article = Article::findOrFail($id);
+Route::get('/articles/{article}/edit', [ArticleController::class,'edit']);
 
-    //envoyer à une vue
-    return view('show', compact('article'));
-});
+Route::patch('/articles/{article}', [ArticleController::class, 'update'] );
 
-Route::post('/articles', function(){
-    //valider les données (verifier qu'elles sont bien remplies)
-
-    request()->validate([
-       'title'=>'required|min:5|max:50',
-       'content'=>'required'
-    ]);
-
-    //les données sont validés
-    $a = new Article;
-    $a->title = request('title');
-    $a->content = request('content');
-    $a->picture = request('picture');
-    $a->published_at = date('Y-m-d h:i:s');
-
-    $a->save();
-
-    return redirect('/articles/'.$a->id);
-});
-
-Route::get('/articles/{id}/edit', function($id){
-    //recuperer 1 seul article
-    $article = Article::findOrFail($id);
-
-    //envoyer à une vue
-    return view('edit', compact('article'));
-});
-
-
-Route::patch('/articles/{id}', function($id){
-    //valider les données (verifier qu'elles sont bien remplies)
-    request()->validate([
-        'title'=>'required|min:5|max:50',
-        'content'=>'required'
-    ]);
-
-    //les données sont validés
-    $a = Article::findOrFail($id);
-    $a->title = request('title');
-    $a->content = request('content');
-    $a->picture = request('picture');
-
-    $a->save();
-
-    return redirect('/articles/'.$a->id);
-});
-
-Route::delete('/articles/{id}', function($id){
-   $a = Article::findOrFail($id);
-   $a->delete();
-   return redirect('/articles');
-});
+Route::delete('/articles/{article}', [ArticleController::class,'destroy']);
