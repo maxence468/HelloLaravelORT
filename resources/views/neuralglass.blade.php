@@ -75,7 +75,14 @@
             MySuperBlog
         </a>
         <ul class="nav-links">
-            <li><a href="/articles/create">Créer Article</a></li>
+            <li><a href="/articles/create">Créer article</a></li>
+            @auth
+                <li>{{Auth::user()->name}}</li>
+                <li><a href="/logout" class="logout-button">Se déconnecter</a></li>
+
+            @else
+                <li><a href="/login" class="login-button">Se connecter</a></li>
+            @endauth
         </ul>
         </ul>
         <div class="mobile-menu-toggle">
