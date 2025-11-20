@@ -72,16 +72,16 @@
                     <animate attributeName="opacity" values="0.6;1;0.6" dur="2.8s" repeatCount="indefinite"/>
                 </line>
             </svg>
-            MySuperBlog
+            {{ __('MonSuperBlog') }}
         </a>
         <ul class="nav-links">
-            <li><a href="/articles/create">Créer article</a></li>
+            <li><a href="/articles/create">{{__('Créer article')}}</a></li>
             @auth
                 <li>{{Auth::user()->name}}</li>
-                <li><a href="/logout" class="logout-button">Se déconnecter</a></li>
+                <li><a href="/logout" class="logout-button">{{__('Se déconnecter')}}</a></li>
 
             @else
-                <li><a href="/login" class="login-button">Se connecter</a></li>
+                <li><a href="/login" class="login-button">{{__('Se connecter')}}</a></li>
             @endauth
         </ul>
         </ul>
@@ -103,7 +103,7 @@
 <!-- Section 1: Hero -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <div class="hero-subtitle">Welcome to the Future</div>
+        <div class="hero-subtitle">{{__('Bienvenue dans le future')}}</div>
         <h1>@yield('title')</h1>
     </div>
 </section>

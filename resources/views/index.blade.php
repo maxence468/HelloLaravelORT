@@ -1,9 +1,9 @@
 @extends('neuralglass')
 
-@section('title', 'Tous les articles')
+@section('title', __('Tous les articles'))
 
 @section('main')
-    <h1 class="text-center text-5xl m-10">Tous les articles</h1>
+    <h1 class="text-center text-5xl m-10">{{__('Tous les articles')}}</h1>
     <br>
     <div class="flex justify-center">
         <table class=" border-5 border-solid text-center text-2xl bg-indigo-400/20 ">
