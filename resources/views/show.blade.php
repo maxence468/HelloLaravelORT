@@ -6,6 +6,16 @@
     <div class="flex justify-center flex-col px-30 py-40">
         <h1 class="text-[40px]">Article {{$article->id}}</h1>
         <p>Titre : {{$article->title}}</p>
+        <p>Author : {{ $article->user->name }}</p>
+        <p>Tags :
+        <ul>
+            @forelse($article->tags as $tag)
+                <li>{{ $tag->name }}</li>
+            @empty
+                Aucun tag
+            @endforelse
+        </ul>
+        </p>
         <p>Date publication : {{$article->published_at}}</p>
         <p>Contenu : {{$article->content}}</p>
         <p>Photo : {{$article->picture}}</p>
